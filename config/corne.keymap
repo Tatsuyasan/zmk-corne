@@ -6,9 +6,9 @@
 
 #define HOST_OS 1
 
-#include "unicode_helper.h"
-#include "macro_french.dtsi"
-#include "macro_shift.dtsi"
+#include "helpers/macro_helper.h"
+#include "helpers/macro_french.dtsi"
+#include "helpers/macro_shift.dtsi"
 
 // Layer Definitions
 #define QWERTY 0
@@ -25,15 +25,15 @@
 // Behavior configuration
 &mt {
     compatible = "zmk,behavior-hold-tap";
-    tapping-term-ms = <200>;
-    quick_tap_ms = <50>;
+    tapping-term-ms = <220>;
+    quick_tap_ms = <150>;
     flavor = "tap-preferred";
 };
 
 &lt {
     compatible = "zmk,behavior-hold-tap";
-    tapping-term-ms = <200>;
-    quick_tap_ms = <0>;
+    tapping-term-ms = <220>;
+    quick_tap_ms = <150>;
     flavor = "tap-preferred";
 };
 
@@ -44,14 +44,11 @@
 
 // Keymap configuration
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        combo_hub_base_layers {
-            timeout-ms = <50>;
-            bindings = <&to 2>;
-            key-positions = <0 11>;
-            layers = <2>;
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <3 7>;
+            then-layer = <2>;
         };
     };
 
