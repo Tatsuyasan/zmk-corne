@@ -19,6 +19,7 @@
 #define FRENCH 9
 
 // Behavior configuration
+
 &mt {
     compatible = "zmk,behavior-hold-tap";
     tapping-term-ms = <220>;
@@ -41,6 +42,17 @@
 
 // Keymap configuration
 / {
+    behaviors {
+        lls: layout_layers {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <500>;
+            quick_tap_ms = <200>;
+            bindings = <&mo>, <&kp>;
+            flavor = "tap-preferred";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -52,10 +64,10 @@
 //                            | ESC/MEDIA | TAB/MOUSE | SPACE/NAV | # | ENTER/SYM | BSPC/NUM | DEL/FN  |
 
             bindings = <
-&kp ESC     &kp Q       &kp W       &kp E          &kp R          &kp T                &kp Y          &kp U         &kp I          &kp O         &kp P          &kp MINUS
-&trans      &mt LGUI A  &mt LALT S  &mt LCTRL D    &mt LSHFT F    &lt FRENCH G         &lt FRENCH H   &mt LSHFT J   &mt LCTRL K    &mt LALT L    &mt LGUI SEMI  &kp SQT
-&trans      &kp Z       &mt RALT X  &kp C          &kp V          &kp B                &kp N          &kp M         &kp CMMA       &mt RALT DOT  &kp FSLH       &kp GRAVE
-                                    &lt MEDIA ESC  &lt MOUSE TAB  &lt NAV SPACE        &lt SYM ENTER  &lt NUM BSPC  &lt FN DEL
+&lls LAYERS ESC  &kp Q       &kp W       &kp E          &kp R          &kp T                &kp Y          &kp U         &kp I          &kp O         &kp P          &kp MINUS
+&trans           &mt LGUI A  &mt LALT S  &mt LCTRL D    &mt LSHFT F    &lt FRENCH G         &lt FRENCH H   &mt LSHFT J   &mt LCTRL K    &mt LALT L    &mt LGUI SEMI  &kp SQT
+&trans           &kp Z       &mt RALT X  &kp C          &kp V          &kp B                &kp N          &kp M         &kp CMMA       &mt RALT DOT  &kp FSLH       &kp GRAVE
+                                         &lt MEDIA ESC  &lt MOUSE TAB  &lt NAV SPACE        &lt SYM ENTER  &lt NUM BSPC  &lt FN DEL
             >;
         };
  
@@ -67,7 +79,7 @@
 //                          |  ESC  |  TAB  | SPACE | # | ENTER | BSPC  |  DEL  |
 
             bindings = <
-&kp ESC  &kp Q  &kp W  &kp E    &kp R      &kp T          &kp Y      &kp U     &kp I     &kp O    &kp P     &kp MINUS
+&trans   &kp Q  &kp W  &kp E    &kp R      &kp T          &kp Y      &kp U     &kp I     &kp O    &kp P     &kp MINUS
 &trans   &kp A  &kp S  &kp D    &kp F      &kp G          &kp H      &kp J     &kp K     &kp L    &kp SEMI  &kp SQT
 &trans   &kp Z  &kp X  &kp C    &kp V      &kp B          &kp N      &kp M     &kp CMMA  &kp DOT  &kp FSLH  &kp GRAVE
                           &kp ESC  &kp TAB    &kp SPACE      &kp ENTER  &kp BSPC  &kp DEL
@@ -202,5 +214,3 @@
 
     };
 };
-
-CONDITIONAL_LAYER(NAV SYM, LAYERS)
